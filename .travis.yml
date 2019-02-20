@@ -5,7 +5,9 @@ node_js:
 
 preinstall: npm config set package-lock false
 
-script: npm run test
+script:
+  - eslint src/**/*.js
+  - npm run test
 
 notifications:
   email: false
