@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/currency-exchange/static/js/runtime~main.4dd11988.js"
   },
   {
-    "revision": "f0b0e071e282a4c699e2",
-    "url": "/currency-exchange/static/js/main.f0b0e071.chunk.js"
+    "revision": "65d07d54c3f8215feabf",
+    "url": "/currency-exchange/static/js/main.65d07d54.chunk.js"
   },
   {
     "revision": "063ce5bc9f8a30d66648",
     "url": "/currency-exchange/static/js/2.063ce5bc.chunk.js"
   },
   {
-    "revision": "89b02fd037e74e428e974b9a36e65f0b",
+    "revision": "ab2cdfd8e438565cbd57efa3704cd32f",
     "url": "/currency-exchange/index.html"
   }
 ];
