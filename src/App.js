@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
+import Home from "./pages/Home";
+import {CssBaseline} from "@material-ui/core";
 
 class App extends Component {
   render() {
     return (
-      <div/>
+      <Fragment>
+        <CssBaseline/>
+        <Home/>
+      </Fragment>
     );
   }
 }
