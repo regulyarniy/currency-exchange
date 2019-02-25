@@ -11,7 +11,8 @@ import {
   Avatar,
   ListItemIcon,
   Menu,
-  MenuItem
+  MenuItem,
+  Paper
 } from "@material-ui/core";
 import {Star} from '@material-ui/icons';
 
@@ -75,7 +76,7 @@ class Home extends PureComponent {
                 aria-haspopup="true"
                 onClick={this.handleClick}
               >
-                Base Currency
+                Base Currency: USD
               </Button>
               <Menu
                 id="simple-menu"
@@ -96,22 +97,24 @@ class Home extends PureComponent {
             </Grid>
           </Grid>
         </AppBar>
-        <List className={classes.list}>
-          <ListItem button>
-            <Avatar className={classes[getRandomBackgroundKey(`USD`)]}>USD</Avatar>
-            <ListItemText primary="1"/>
-            <ListItemIcon>
-              <Star color="secondary"/>
-            </ListItemIcon>
-          </ListItem>
-          <ListItem button>
-            <Avatar className={classes[getRandomBackgroundKey(`RUB`)]}>RUB</Avatar>
-            <ListItemText primary="65.7533"/>
-            <ListItemIcon>
-              <Star/>
-            </ListItemIcon>
-          </ListItem>
-        </List>
+        <Paper elevation={1}>
+          <List className={classes.list}>
+            <ListItem button>
+              <Avatar className={classes[getRandomBackgroundKey(`USD`)]}>USD</Avatar>
+              <ListItemText primary="1"/>
+              <ListItemIcon>
+                <Star color="secondary"/>
+              </ListItemIcon>
+            </ListItem>
+            <ListItem button>
+              <Avatar className={classes[getRandomBackgroundKey(`RUB`)]}>RUB</Avatar>
+              <ListItemText primary="65.7533"/>
+              <ListItemIcon>
+                <Star/>
+              </ListItemIcon>
+            </ListItem>
+          </List>
+        </Paper>
       </Fragment>
     )
   }
