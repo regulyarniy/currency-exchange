@@ -4,8 +4,21 @@ import {CssBaseline} from "@material-ui/core";
 import Calculator from "./pages/Calculator";
 import Header from "./components/Header";
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {operations} from "./store";
 
-class App extends Component {
+const mapStateToProps = (state) => {
+  return {
+    rates: state.rates,
+  };
+};
+
+export class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(operations.getRates());
+  }
+
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
@@ -20,4 +33,8 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps)(App);
