@@ -16,18 +16,25 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getRates: () => dispatch(operations.getRates()),
+    setBase: (base) => dispatch(operations.setBase(base))
+  }
+};
+
 export class App extends Component {
   componentDidMount() {
-    this.props.dispatch(operations.getRates());
+    this.props.getRates();
   }
 
   render() {
-    const {base, currencies} = this.props;
+    const {base, currencies, setBase} = this.props;
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
           <CssBaseline/>
-          <Header base={base} currencies={currencies}/>
+          <Header base={base} currencies={currencies} onBaseChange={setBase}/>
           <Route path="/" exact component={Home}/>
           <Route path="/calculator" component={Calculator}/>
         </Fragment>
@@ -37,9 +44,10 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  getRates: PropTypes.func,
+  setBase: PropTypes.func,
   base: PropTypes.string.isRequired,
   currencies: PropTypes.array
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

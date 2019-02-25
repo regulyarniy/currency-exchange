@@ -14,6 +14,13 @@ const failRates = (error) => ({
   }
 });
 
+const setBaseCurrency = (base) => ({
+  type: Type.BASE_CURRENCY_SET,
+  payload: {
+    base
+  }
+});
+
 const loadUserSettings = (settings) => ({
   type: Type.USER_SETTINGS_LOAD,
   payload: {
@@ -38,6 +45,7 @@ const deleteFavorite = (currencyName) => ({
 export default {
   loadRates,
   failRates,
+  setBaseCurrency,
   loadUserSettings,
   addFavorite,
   deleteFavorite

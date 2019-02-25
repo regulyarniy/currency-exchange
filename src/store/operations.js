@@ -13,6 +13,12 @@ const getRates = () => {
   }
 };
 
+const setBase = (base) => {
+  return (dispatch) => {
+    dispatch(actions.setBaseCurrency(base));
+  }
+};
+
 const resetRatesError = () => {
   return (dispatch) => {
     dispatch(actions.failRates(null));
@@ -22,5 +28,6 @@ const resetRatesError = () => {
 
 export default {
   getRates,
+  setBase,
   resetRatesError
 };

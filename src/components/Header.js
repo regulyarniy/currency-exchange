@@ -22,7 +22,7 @@ class Header extends PureComponent {
       .map((currency) =>
         <MenuItem
           key={currency}
-          onClick={this.handleClose}
+          onClick={() => this.handleClose(currency)}
         >
           {currency}
         </MenuItem>
@@ -33,8 +33,9 @@ class Header extends PureComponent {
     this.setState({anchorEl: event.currentTarget});
   };
 
-  handleClose = () => {
+  handleClose = (currency) => {
     this.setState({anchorEl: null});
+    this.props.onBaseChange(currency);
   };
 
   handleToHome = () => {
@@ -89,7 +90,7 @@ class Header extends PureComponent {
               variant={isCalculatorURL ? `contained` : `outlined`}
               onClick={this.handleToCalculator}
             >
-              Convertion calculator
+              Exchange calculator
             </Button>
           </Grid>
         </Grid>
@@ -103,7 +104,8 @@ Header.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   base: PropTypes.string.isRequired,
-  currencies: PropTypes.array
+  currencies: PropTypes.array,
+  onBaseChange: PropTypes.func
 };
 
 export default withRouter(withStyles(styles)(Header));
