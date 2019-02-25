@@ -17,6 +17,18 @@ class Header extends PureComponent {
     }
   }
 
+  get menuItems() {
+    return this.props.currencies
+      .map((currency) =>
+        <MenuItem
+          key={currency}
+          onClick={this.handleClose}
+        >
+          {currency}
+        </MenuItem>
+      )
+  }
+
   handleClick = (event) => {
     this.setState({anchorEl: event.currentTarget});
   };
@@ -57,9 +69,7 @@ class Header extends PureComponent {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose}>USD</MenuItem>
-              <MenuItem onClick={this.handleClose}>RUB</MenuItem>
-              <MenuItem onClick={this.handleClose}>EUR</MenuItem>
+              {this.menuItems}
             </Menu>
           </Grid>
           <Grid item xs={12} sm="auto">
@@ -92,7 +102,8 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  base: PropTypes.string.isRequired
+  base: PropTypes.string.isRequired,
+  currencies: PropTypes.array
 };
 
 export default withRouter(withStyles(styles)(Header));

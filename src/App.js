@@ -6,12 +6,13 @@ import Header from "./components/Header";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {operations} from "./store";
+import {operations, selectors} from "./store";
 
 const mapStateToProps = (state) => {
   return {
     base: state.base,
     rates: state.rates,
+    currencies: selectors.getCurrencies(state)
   };
 };
 
@@ -21,12 +22,12 @@ export class App extends Component {
   }
 
   render() {
-    const {base} = this.props;
+    const {base, currencies} = this.props;
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
           <CssBaseline/>
-          <Header base={base}/>
+          <Header base={base} currencies={currencies}/>
           <Route path="/" exact component={Home}/>
           <Route path="/calculator" component={Calculator}/>
         </Fragment>
@@ -37,7 +38,8 @@ export class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  base: PropTypes.string.isRequired
+  base: PropTypes.string.isRequired,
+  currencies: PropTypes.array
 };
 
 export default connect(mapStateToProps)(App);
