@@ -1,17 +1,12 @@
-import React, {Fragment, PureComponent} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {
-  AppBar,
-  Button,
-  Grid,
   withStyles,
   List,
   ListItem,
   ListItemText,
   Avatar,
   ListItemIcon,
-  Menu,
-  MenuItem,
   Paper
 } from "@material-ui/core";
 import {Star} from '@material-ui/icons';
@@ -33,9 +28,6 @@ const getRandomBackgroundKey = (string) => {
 };
 
 const styles = (theme) => ({
-  root: {
-    padding: 8,
-  },
   list: {
     margin: `auto`,
     marginTop: 16,
@@ -43,79 +35,35 @@ const styles = (theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  paper: {
+    margin: 16
+  },
   ...backgrounds
 });
 
 
 class Home extends PureComponent {
-  state = {
-    anchorEl: null,
-  };
-
-  handleClick = (event) => {
-    this.setState({anchorEl: event.currentTarget});
-  };
-
-  handleClose = () => {
-    this.setState({anchorEl: null});
-  };
-
   render() {
     const {classes} = this.props;
-    const {anchorEl} = this.state;
     return (
-      <Fragment>
-        <AppBar className={classes.root} position="static" color="default">
-          <Grid container justify="flex-end" alignItems="center" spacing={16}>
-            <Grid item xs={12} sm="auto">
-              <Button
-                fullWidth
-                color="secondary"
-                variant="outlined"
-                aria-owns={anchorEl ? `simple-menu` : undefined}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-              >
-                Base Currency: USD
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.handleClose}
-              >
-                <MenuItem onClick={this.handleClose}>USD</MenuItem>
-                <MenuItem onClick={this.handleClose}>RUB</MenuItem>
-                <MenuItem onClick={this.handleClose}>EUR</MenuItem>
-              </Menu>
-            </Grid>
-            <Grid item xs={12} sm="auto">
-              <Button fullWidth color="primary" variant="contained">Exchange rates</Button>
-            </Grid>
-            <Grid item xs={12} sm="auto">
-              <Button fullWidth variant="outlined">Convertion calculator</Button>
-            </Grid>
-          </Grid>
-        </AppBar>
-        <Paper elevation={1}>
-          <List className={classes.list}>
-            <ListItem button>
-              <Avatar className={classes[getRandomBackgroundKey(`USD`)]}>USD</Avatar>
-              <ListItemText primary="1"/>
-              <ListItemIcon>
-                <Star color="secondary"/>
-              </ListItemIcon>
-            </ListItem>
-            <ListItem button>
-              <Avatar className={classes[getRandomBackgroundKey(`RUB`)]}>RUB</Avatar>
-              <ListItemText primary="65.7533"/>
-              <ListItemIcon>
-                <Star/>
-              </ListItemIcon>
-            </ListItem>
-          </List>
-        </Paper>
-      </Fragment>
+      <Paper elevation={1} className={classes.paper}>
+        <List className={classes.list}>
+          <ListItem button>
+            <Avatar className={classes[getRandomBackgroundKey(`USD`)]}>USD</Avatar>
+            <ListItemText primary="1"/>
+            <ListItemIcon>
+              <Star color="secondary"/>
+            </ListItemIcon>
+          </ListItem>
+          <ListItem button>
+            <Avatar className={classes[getRandomBackgroundKey(`RUB`)]}>RUB</Avatar>
+            <ListItemText primary="65.7533"/>
+            <ListItemIcon>
+              <Star/>
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      </Paper>
     )
   }
 }
