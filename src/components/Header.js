@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {AppBar, Button, Grid, Menu, MenuItem, withStyles} from "@material-ui/core";
 import PropTypes from "prop-types";
+import {withRouter} from "react-router-dom";
 
 const styles = () => ({
   root: {
@@ -24,9 +25,18 @@ class Header extends PureComponent {
     this.setState({anchorEl: null});
   };
 
+  handleToHome = () => {
+    this.props.history.push(`/`);
+  };
+
+  handleToCalculator = () => {
+    this.props.history.push(`calculator`);
+  };
+
   render() {
-    const {classes} = this.props;
+    const {classes, location} = this.props;
     const {anchorEl} = this.state;
+    const isCalculatorURL = location.pathname.indexOf(`calculator`) !== -1;
     return (
       <AppBar className={classes.root} position="static" color="default">
         <Grid container justify="flex-end" alignItems="center" spacing={16}>
@@ -53,10 +63,24 @@ class Header extends PureComponent {
             </Menu>
           </Grid>
           <Grid item xs={12} sm="auto">
-            <Button fullWidth color="primary" variant="contained">Exchange rates</Button>
+            <Button
+              fullWidth
+              color={isCalculatorURL ? `default` : `primary`}
+              variant={isCalculatorURL ? `outlined` : `contained`}
+              onClick={this.handleToHome}
+            >
+              Exchange rates
+            </Button>
           </Grid>
           <Grid item xs={12} sm="auto">
-            <Button fullWidth variant="outlined">Convertion calculator</Button>
+            <Button
+              fullWidth
+              color={isCalculatorURL ? `primary` : `default`}
+              variant={isCalculatorURL ? `contained` : `outlined`}
+              onClick={this.handleToCalculator}
+            >
+              Convertion calculator
+            </Button>
           </Grid>
         </Grid>
       </AppBar>
@@ -65,7 +89,9 @@ class Header extends PureComponent {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));
