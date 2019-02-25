@@ -8,6 +8,10 @@ describe(`App component`, () => {
 
   it(`renders without errors`, () => {
     const div = document.createElement(`div`);
-    ReactDOM.render(<MemoryRouter><App dispatch={mockFn}/></MemoryRouter>, div);
+    ReactDOM.render(
+      <MemoryRouter>
+        <App dispatch={mockFn} base={`GBP`}/>
+      </MemoryRouter>,
+      div);
   })
 });

@@ -34,7 +34,7 @@ class Header extends PureComponent {
   };
 
   render() {
-    const {classes, location} = this.props;
+    const {classes, location, base} = this.props;
     const {anchorEl} = this.state;
     const isCalculatorURL = location.pathname.indexOf(`calculator`) !== -1;
     return (
@@ -49,7 +49,7 @@ class Header extends PureComponent {
               aria-haspopup="true"
               onClick={this.handleClick}
             >
-              Base Currency: USD
+              Base Currency: {base}
             </Button>
             <Menu
               id="simple-menu"
@@ -91,7 +91,8 @@ class Header extends PureComponent {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  base: PropTypes.string.isRequired
 };
 
 export default withRouter(withStyles(styles)(Header));

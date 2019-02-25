@@ -10,6 +10,7 @@ import {operations} from "./store";
 
 const mapStateToProps = (state) => {
   return {
+    base: state.base,
     rates: state.rates,
   };
 };
@@ -20,11 +21,12 @@ export class App extends Component {
   }
 
   render() {
+    const {base} = this.props;
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
           <CssBaseline/>
-          <Header/>
+          <Header base={base}/>
           <Route path="/" exact component={Home}/>
           <Route path="/calculator" component={Calculator}/>
         </Fragment>
@@ -34,7 +36,8 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  base: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(App);
