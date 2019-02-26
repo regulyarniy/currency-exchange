@@ -40,23 +40,15 @@ export class App extends Component {
       toggleFavorite
     } = this.props;
 
+    const homeProps = {favoriteRates, notFavoriteRates, onToggleFavorite: toggleFavorite};
+    const calculatorProps = {currencies};
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
           <CssBaseline/>
           <Header base={base} currencies={currencies} onBaseChange={setBase}/>
-          <Route
-            path="/"
-            exact
-            render={() =>
-              <Home
-                favoriteRates={favoriteRates}
-                notFavoriteRates={notFavoriteRates}
-                onToggleFavorite={toggleFavorite}
-              />
-            }
-          />
-          <Route path="/calculator" component={Calculator}/>
+          <Route path="/" exact render={() => <Home {...homeProps}/>}/>
+          <Route path="/calculator" render={() => <Calculator {...calculatorProps}/>}/>
         </Fragment>
       </Router>
     );

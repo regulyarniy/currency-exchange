@@ -19,6 +19,41 @@ const styles = () => ({
 });
 
 class Calculator extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstValue: 1,
+      firstType: ``,
+      secondValue: 1,
+      secondType: ``
+    };
+  }
+
+
+  componentDidMount() {
+    this.setState({firstType: this.props.currencies[0], secondType: this.props.currencies[0]})
+  }
+
+  get currencyOptions() {
+    return this.props.currencies
+      .map((currencyName) => <option key={currencyName} value={currencyName}>{currencyName}</option>)
+  }
+
+  handleChangeFirstInput = (event) => {
+    this.setState({firstValue: event.target.value})
+  };
+
+  handleChangeSecondInput = (event) => {
+    this.setState({secondValue: event.target.value})
+  };
+
+  handleChangeFirstType = (event) => {
+    this.setState({firstType: event.target.value})
+  };
+
+  handleChangeSecondType = (event) => {
+    this.setState({secondType: event.target.value})
+  };
 
   render() {
     const {classes} = this.props;
@@ -40,6 +75,8 @@ class Calculator extends PureComponent {
                 min: `0`,
                 step: `1`
               }}
+              value={this.state.firstValue}
+              onChange={this.handleChangeFirstInput}
             />
             <Select
               className={classes.input}
@@ -48,10 +85,9 @@ class Calculator extends PureComponent {
                 name: `first-currency`,
                 id: `first-currency`,
               }}
+              onChange={this.handleChangeFirstType}
             >
-              <option value="USD">USD</option>
-              <option value="RUB">RUB</option>
-              <option value="EUR">EUR</option>
+              {this.currencyOptions}
             </Select>
           </Grid>
           <Grid item xs={12} sm="auto" container justify="center">
@@ -64,6 +100,8 @@ class Calculator extends PureComponent {
                 min: `0`,
                 step: `1`
               }}
+              value={this.state.secondValue}
+              onChange={this.handleChangeSecondInput}
             />
             <Select
               className={classes.input}
@@ -72,10 +110,9 @@ class Calculator extends PureComponent {
                 name: `second-currency`,
                 id: `second-currency`,
               }}
+              onChange={this.handleChangeSecondType}
             >
-              <option value="USD">USD</option>
-              <option value="RUB">RUB</option>
-              <option value="EUR">EUR</option>
+              {this.currencyOptions}
             </Select>
           </Grid>
         </Grid>
@@ -85,7 +122,8 @@ class Calculator extends PureComponent {
 }
 
 Calculator.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  currencies: PropTypes.array
 };
 
 export default withStyles(styles)(Calculator);
