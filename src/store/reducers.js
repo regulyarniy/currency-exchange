@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   base: BASE_CURRENCY,
   initialRates: {},
   rates: {},
+  favorites: [],
   error: null
 };
 
@@ -30,11 +31,25 @@ const appReducer = (state = INITIAL_STATE, action) => {
       delete newRates[newBase];
       Object.getOwnPropertyNames(newRates)
         .forEach((key) => newRates[key] = format(state.initialRates[key] * ratio));
-      newRates[state.base] = format(state.initialRates[state.base]*ratio);
+      newRates[state.base] = format(state.initialRates[state.base] * ratio);
       return {
         ...state,
         rates: newRates,
         base: newBase
+      };
+    }
+
+    case Type.FAVORITE_TOGGLE: {
+      const newFavorites = state.favorites.slice();
+      const favoriteIndex = newFavorites.indexOf(action.payload.currencyName);
+      if (favoriteIndex !== -1) {
+        newFavorites.splice(favoriteIndex, 1);
+      } else {
+        newFavorites.push(action.payload.currencyName);
+      }
+      return {
+        ...state,
+        favorites: newFavorites
       };
     }
 

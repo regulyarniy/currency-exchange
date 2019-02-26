@@ -8,7 +8,10 @@ describe(`App component`, () => {
     dispatch: jest.fn(),
     getRates: jest.fn(),
     base: ``,
-    currencies: []
+    currencies: [],
+    favoriteRates: {},
+    notFavoriteRates: {},
+    toggleFavorite: jest.fn(),
   };
 
   it(`renders without errors`, () => {

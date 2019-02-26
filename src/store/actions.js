@@ -28,15 +28,8 @@ const loadUserSettings = (settings) => ({
   }
 });
 
-const addFavorite = (currencyName) => ({
-  type: Type.FAVORITE_ADD,
-  payload: {
-    currencyName
-  }
-});
-
-const deleteFavorite = (currencyName) => ({
-  type: Type.FAVORITE_DELETE,
+const toggleFavorite = (currencyName) => ({
+  type: Type.FAVORITE_TOGGLE,
   payload: {
     currencyName
   }
@@ -47,6 +40,5 @@ export default {
   failRates,
   setBaseCurrency,
   loadUserSettings,
-  addFavorite,
-  deleteFavorite
+  toggleFavorite
 };

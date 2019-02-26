@@ -19,6 +19,12 @@ const setBase = (base) => {
   }
 };
 
+const toggleFavorite = (currencyName) => {
+  return (dispatch) => {
+    dispatch(actions.toggleFavorite(currencyName));
+  }
+};
+
 const resetRatesError = () => {
   return (dispatch) => {
     dispatch(actions.failRates(null));
@@ -29,5 +35,6 @@ const resetRatesError = () => {
 export default {
   getRates,
   setBase,
+  toggleFavorite,
   resetRatesError
 };

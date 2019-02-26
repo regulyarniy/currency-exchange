@@ -44,18 +44,37 @@ const styles = (theme) => ({
 
 class Home extends PureComponent {
 
-  get listItems() {
-    return Object.entries(this.props.rates)
+  get listFavoriteItems() {
+    return Object.entries(this.props.favoriteRates)
       .map((item) => {
           const key = item[0];
           const value = item[1];
-          const {classes} = this.props;
+          const {classes, onToggleFavorite} = this.props;
           return (
-            <ListItem key={key} button>
+            <ListItem key={key} button onClick={() => onToggleFavorite(key)}>
               <Avatar className={classes[getRandomBackgroundKey(key)]}>{key}</Avatar>
               <ListItemText primary={value}/>
               <ListItemIcon>
-                <Star color="default"/>
+                <Star color="secondary"/>
+              </ListItemIcon>
+            </ListItem>
+          )
+        }
+      )
+  }
+
+  get listNotFavoriteItems() {
+    return Object.entries(this.props.notFavoriteRates)
+      .map((item) => {
+          const key = item[0];
+          const value = item[1];
+          const {classes, onToggleFavorite} = this.props;
+          return (
+            <ListItem key={key} button onClick={() => onToggleFavorite(key)}>
+              <Avatar className={classes[getRandomBackgroundKey(key)]}>{key}</Avatar>
+              <ListItemText primary={value}/>
+              <ListItemIcon>
+                <Star color="inherit"/>
               </ListItemIcon>
             </ListItem>
           )
@@ -68,7 +87,8 @@ class Home extends PureComponent {
     return (
       <Paper elevation={1} className={classes.paper}>
         <List className={classes.list}>
-          {this.listItems}
+          {this.listFavoriteItems}
+          {this.listNotFavoriteItems}
         </List>
       </Paper>
     )
@@ -77,7 +97,9 @@ class Home extends PureComponent {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  rates: PropTypes.object
+  favoriteRates: PropTypes.object,
+  notFavoriteRates: PropTypes.object,
+  onToggleFavorite: PropTypes.func
 };
 
 export default withStyles(styles)(Home);
