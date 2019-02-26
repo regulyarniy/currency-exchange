@@ -43,25 +43,32 @@ const styles = (theme) => ({
 
 
 class Home extends PureComponent {
+
+  get listItems() {
+    return Object.entries(this.props.rates)
+      .map((item) => {
+          const key = item[0];
+          const value = item[1];
+          const {classes} = this.props;
+          return (
+            <ListItem key={key} button>
+              <Avatar className={classes[getRandomBackgroundKey(key)]}>{key}</Avatar>
+              <ListItemText primary={value}/>
+              <ListItemIcon>
+                <Star color="default"/>
+              </ListItemIcon>
+            </ListItem>
+          )
+        }
+      )
+  }
+
   render() {
     const {classes} = this.props;
     return (
       <Paper elevation={1} className={classes.paper}>
         <List className={classes.list}>
-          <ListItem button>
-            <Avatar className={classes[getRandomBackgroundKey(`USD`)]}>USD</Avatar>
-            <ListItemText primary="1"/>
-            <ListItemIcon>
-              <Star color="secondary"/>
-            </ListItemIcon>
-          </ListItem>
-          <ListItem button>
-            <Avatar className={classes[getRandomBackgroundKey(`RUB`)]}>RUB</Avatar>
-            <ListItemText primary="65.7533"/>
-            <ListItemIcon>
-              <Star/>
-            </ListItemIcon>
-          </ListItem>
+          {this.listItems}
         </List>
       </Paper>
     )
@@ -69,7 +76,8 @@ class Home extends PureComponent {
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  rates: PropTypes.object
 };
 
 export default withStyles(styles)(Home);

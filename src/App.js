@@ -29,13 +29,13 @@ export class App extends Component {
   }
 
   render() {
-    const {base, currencies, setBase} = this.props;
+    const {base, currencies, setBase, rates} = this.props;
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
           <CssBaseline/>
           <Header base={base} currencies={currencies} onBaseChange={setBase}/>
-          <Route path="/" exact component={Home}/>
+          <Route path="/" exact render={() => <Home rates={rates}/>}/>
           <Route path="/calculator" component={Calculator}/>
         </Fragment>
       </Router>
@@ -47,7 +47,8 @@ App.propTypes = {
   getRates: PropTypes.func,
   setBase: PropTypes.func,
   base: PropTypes.string.isRequired,
-  currencies: PropTypes.array
+  currencies: PropTypes.array,
+  rates: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
