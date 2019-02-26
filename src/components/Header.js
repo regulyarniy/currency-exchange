@@ -55,6 +55,7 @@ class Header extends PureComponent {
         <Grid container justify="flex-end" alignItems="center" spacing={16}>
           <Grid item xs={12} sm="auto">
             <Button
+              disabled={isCalculatorURL}
               fullWidth
               color="secondary"
               variant="outlined"
