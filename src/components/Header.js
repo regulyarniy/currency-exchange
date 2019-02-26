@@ -68,7 +68,7 @@ class Header extends PureComponent {
               id="simple-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              onClose={this.handleClose}
+              onClose={() => this.handleClose(base)}
             >
               {this.menuItems}
             </Menu>

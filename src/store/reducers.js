@@ -21,6 +21,9 @@ const appReducer = (state = INITIAL_STATE, action) => {
       };
 
     case Type.BASE_CURRENCY_SET: {
+      if (action.payload.base === state.base) {
+        return state
+      }
       const newBase = action.payload.base;
       const newRates = Object.assign({}, state.initialRates);
       const ratio = 1 / state.initialRates[newBase];
