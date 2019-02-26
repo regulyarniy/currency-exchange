@@ -1,12 +1,14 @@
-import React, {Component, Fragment} from 'react';
-import Home from "./pages/Home";
+import React, {Component, lazy, Suspense} from 'react';
 import {CssBaseline} from "@material-ui/core";
-import Calculator from "./pages/Calculator";
 import Header from "./components/Header";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {operations, selectors} from "./store";
+import Fallback from "./components/Fallback";
+
+const Home = lazy(() => import(`./pages/Home`));
+const Calculator = lazy(() => import(`./pages/Calculator`));
 
 const mapStateToProps = (state) => {
   return {
@@ -46,12 +48,12 @@ export class App extends Component {
     const calculatorProps = {currencies, initialRates};
     return (
       <Router basename={process.env.PUBLIC_URL}>
-        <Fragment>
+        <Suspense fallback={<Fallback/>}>
           <CssBaseline/>
           <Header base={base} currencies={currencies} onBaseChange={setBase}/>
           <Route path="/" exact render={() => <Home {...homeProps}/>}/>
           <Route path="/calculator" render={() => <Calculator {...calculatorProps}/>}/>
-        </Fragment>
+        </Suspense>
       </Router>
     );
   }
