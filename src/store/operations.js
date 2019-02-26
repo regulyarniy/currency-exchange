@@ -8,7 +8,7 @@ const getRates = () => {
       const rates = await response.json();
       dispatch(actions.loadRates(rates.rates));
     } catch (error) {
-      dispatch(actions.failRates(error));
+      dispatch(actions.setError(error));
     }
   }
 };
@@ -27,7 +27,7 @@ const toggleFavorite = (currencyName) => {
 
 const resetRatesError = () => {
   return (dispatch) => {
-    dispatch(actions.failRates(null));
+    dispatch(actions.setError(null));
   }
 };
 

@@ -7,7 +7,7 @@ const loadRates = (rates) => ({
   }
 });
 
-const failRates = (error) => ({
+const setError = (error) => ({
   type: Type.FAILURE,
   payload: {
     error
@@ -21,13 +21,6 @@ const setBaseCurrency = (base) => ({
   }
 });
 
-const loadUserSettings = (settings) => ({
-  type: Type.USER_SETTINGS_LOAD,
-  payload: {
-    settings
-  }
-});
-
 const toggleFavorite = (currencyName) => ({
   type: Type.FAVORITE_TOGGLE,
   payload: {
@@ -37,8 +30,7 @@ const toggleFavorite = (currencyName) => ({
 
 export default {
   loadRates,
-  failRates,
+  setError,
   setBaseCurrency,
-  loadUserSettings,
-  toggleFavorite
+  toggleFavorite,
 };
