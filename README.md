@@ -1,6 +1,8 @@
-# Currency exchange
+# Currency exchange [![Build Status](https://travis-ci.com/regulyarniy/currency-exchange.svg?branch=master)](https://travis-ci.com/regulyarniy/currency-exchange)
 
 SPA for displaying and converting currencies
+
+Thanks https://ratesapi.io/ for rates
 
 Demo: https://regulyarniy.github.io/currency-exchange/
 
