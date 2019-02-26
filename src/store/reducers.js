@@ -53,7 +53,7 @@ const appReducer = (state = INITIAL_STATE, action) => {
       };
     }
 
-    case Type.RATES_FAILURE:
+    case Type.FAILURE:
       return {
         ...state,
         error: action.payload.error

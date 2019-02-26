@@ -8,7 +8,7 @@ const loadRates = (rates) => ({
 });
 
 const failRates = (error) => ({
-  type: Type.RATES_FAILURE,
+  type: Type.FAILURE,
   payload: {
     error
   }
