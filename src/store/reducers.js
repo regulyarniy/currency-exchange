@@ -1,6 +1,6 @@
 import Type from "./types";
 import {BASE_CURRENCY} from "../constants";
-import {format} from "../utils";
+import {format, loadLocalState} from "../utils";
 
 const INITIAL_STATE = {
   base: BASE_CURRENCY,
@@ -9,6 +9,8 @@ const INITIAL_STATE = {
   favorites: [],
   error: null
 };
+
+Object.assign(INITIAL_STATE, loadLocalState());
 
 const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
