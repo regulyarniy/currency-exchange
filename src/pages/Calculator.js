@@ -29,7 +29,6 @@ class Calculator extends PureComponent {
     };
   }
 
-
   componentDidMount() {
     this.setState({firstType: this.props.currencies[0], secondType: this.props.currencies[0]})
   }
@@ -40,19 +39,35 @@ class Calculator extends PureComponent {
   }
 
   handleChangeFirstInput = (event) => {
-    this.setState({firstValue: event.target.value})
+    const {firstType, secondType} = this.state;
+    const {initialRates} = this.props;
+    const firstValue = parseFloat(event.target.value);
+    const secondValue = (firstValue / initialRates[firstType] * initialRates[secondType]).toFixed(4);
+    this.setState({firstValue, secondValue})
   };
 
   handleChangeSecondInput = (event) => {
-    this.setState({secondValue: event.target.value})
+    const {firstType, secondType} = this.state;
+    const {initialRates} = this.props;
+    const secondValue = parseFloat(event.target.value);
+    const firstValue = (secondValue / initialRates[secondType] * initialRates[firstType]).toFixed(4);
+    this.setState({firstValue, secondValue})
   };
 
   handleChangeFirstType = (event) => {
-    this.setState({firstType: event.target.value})
+    const {firstValue, secondType} = this.state;
+    const {initialRates} = this.props;
+    const firstType = event.target.value;
+    const secondValue = (firstValue / initialRates[firstType] * initialRates[secondType]).toFixed(4);
+    this.setState({secondValue, firstType});
   };
 
   handleChangeSecondType = (event) => {
-    this.setState({secondType: event.target.value})
+    const {secondValue, firstType} = this.state;
+    const {initialRates} = this.props;
+    const secondType = event.target.value;
+    const firstValue = (secondValue / initialRates[secondType] * initialRates[firstType]).toFixed(4);
+    this.setState({firstValue, secondType});
   };
 
   render() {
@@ -123,7 +138,8 @@ class Calculator extends PureComponent {
 
 Calculator.propTypes = {
   classes: PropTypes.object.isRequired,
-  currencies: PropTypes.array
+  currencies: PropTypes.array,
+  initialRates: PropTypes.object,
 };
 
 export default withStyles(styles)(Calculator);

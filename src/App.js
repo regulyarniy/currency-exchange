@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
     base: state.base,
     favoriteRates: selectors.getFavoriteRates(state),
     notFavoriteRates: selectors.getNotFavoriteRates(state),
-    currencies: selectors.getCurrencies(state)
+    currencies: selectors.getCurrencies(state),
+    initialRates: state.initialRates
   };
 };
 
@@ -37,11 +38,12 @@ export class App extends Component {
       setBase,
       favoriteRates,
       notFavoriteRates,
-      toggleFavorite
+      toggleFavorite,
+      initialRates
     } = this.props;
 
     const homeProps = {favoriteRates, notFavoriteRates, onToggleFavorite: toggleFavorite};
-    const calculatorProps = {currencies};
+    const calculatorProps = {currencies, initialRates};
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Fragment>
@@ -62,7 +64,8 @@ App.propTypes = {
   currencies: PropTypes.array,
   favoriteRates: PropTypes.object,
   notFavoriteRates: PropTypes.object,
-  toggleFavorite: PropTypes.func
+  toggleFavorite: PropTypes.func,
+  initialRates: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
